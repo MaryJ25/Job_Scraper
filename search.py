@@ -1,4 +1,5 @@
 import argparse
+from scrape import scrape
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers()
@@ -6,11 +7,14 @@ subparsers = parser.add_subparsers()
 
 def search(args):
     print(f"Looking for a {args.position} in {args.location} at {args.seniority} level.")
+    scrape(args.position, args.location, args.seniority)
+    # position = args.position
+    # position = position.replace(' ', '%20')
 
 
 search_parser = subparsers.add_parser('search')
 search_parser.add_argument('position', help='What position are you looking for? (type string)')
-search_parser.add_argument('location', help='Where would you like to work? (type string)')
+search_parser.add_argument('location', help='Where would you like to work - type city or country? (type string)')
 search_parser.add_argument('seniority', help='What seniority level? (type string)')
 search_parser.set_defaults(func=search)
 
